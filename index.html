@@ -36,7 +36,6 @@
             </a>
             <nav class="nav-menu" id="navMenu">
                 <a href="#home" class="nav-link active">Home</a>
-                <a href="#ar-camera" class="nav-link">Kamera AR</a>
                 <a href="#catalog" class="nav-link">Katalog</a>
                 <a href="#portfolio" class="nav-link">Portofolio</a>
                 <a href="#booking" class="nav-link">Booking Survey</a>
@@ -64,9 +63,9 @@
                     <h1 class="hero-title">Solusi Gorden Elegan untuk Rumah, Kantor, dan Hotel Anda</h1>
                     <p class="hero-desc">Ubah suasana ruangan Anda menjadi lebih mewah, nyaman, dan fungsional dengan gorden custom kualitas terbaik. Dibuat presisi sesuai ukuran jendela Anda.</p>
                     <div class="hero-ctas">
-                        <a href="#ar-camera" class="btn btn-glow">
-                            <i data-lucide="camera"></i>
-                            <span>Coba Kamera AR</span>
+                        <a href="#catalog" class="btn btn-glow">
+                            <i data-lucide="shopping-bag"></i>
+                            <span>Lihat Katalog</span>
                         </a>
                         <a href="#booking" class="btn btn-outline">
                             <i data-lucide="calendar"></i>
@@ -85,52 +84,7 @@
 
 
 
-    <!-- AR Camera Try-On Section -->
-    <section id="ar-camera" class="ar-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="sub-title">Coba di Ruangan Anda</span>
-                <h2>Kamera AR (Augmented Reality)</h2>
-                <p>Arahkan kamera ke jendela Anda, dan lihat langsung bagaimana gorden pilihan Anda terpasang secara virtual.</p>
-            </div>
-            
-            <div class="ar-wrapper">
-                <div class="ar-view-container" id="arViewContainer">
-                    <!-- Video from Camera -->
-                    <video id="arVideo" autoplay playsinline></video>
-                    <!-- Canvas for AR Overlay -->
-                    <canvas id="arCanvas"></canvas>
-                    
-                    <!-- Overlay for starting AR -->
-                    <div class="ar-start-overlay" id="arStartOverlay">
-                        <i data-lucide="camera"></i>
-                        <h3>Simulasi dengan Kamera Asli</h3>
-                        <p>Fitur ini memerlukan izin akses kamera perangkat Anda. (Gunakan smartphone untuk hasil terbaik)</p>
-                        <button class="btn btn-primary" id="btnStartAR">
-                            <i data-lucide="video"></i> Buka Kamera
-                        </button>
-                    </div>
 
-                    <!-- AR Controls overlay -->
-                    <div class="ar-controls" id="arControls">
-                        <div class="ar-models">
-                            <button class="btn-ar-model active" data-img="assets/katalog-minimalis.png">Minimalis</button>
-                            <button class="btn-ar-model" data-img="assets/katalog-blackout.png">Blackout</button>
-                            <button class="btn-ar-model" data-img="assets/katalog-roller.png">Roller</button>
-                        </div>
-                        <div class="ar-actions">
-                            <button class="btn-icon-ar" id="btnArScreenshot" title="Ambil Foto">
-                                <i data-lucide="camera"></i>
-                            </button>
-                            <button class="btn-icon-ar btn-close-ar" id="btnStopAR" title="Tutup Kamera">
-                                <i data-lucide="x"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Product Catalog Section -->
     <section id="catalog" class="catalog-section">
@@ -602,7 +556,6 @@
                     <h4>Navigasi</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#ar-camera">Kamera AR</a></li>
                         <li><a href="#catalog">Katalog Produk</a></li>
                         <li><a href="#booking">Booking Survey</a></li>
                     </ul>
@@ -636,6 +589,5 @@
 
     <!-- Application Scripts -->
     <script src="app.js"></script>
-    <script src="ar.js"></script>
 </body>
 </html>

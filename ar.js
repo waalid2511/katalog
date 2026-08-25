@@ -20,16 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let isArRunning = false;
 
     // Overlay position and size defaults
+    let baseRect = { width: 300, height: 400 };
     let overlayRect = {
         x: 0,
         y: 0,
         width: 300,
         height: 400
     };
+    
+    // Sliders
+    const widthSlider = document.getElementById('arWidthSlider');
+    const heightSlider = document.getElementById('arHeightSlider');
 
     if (canvas) {
         ctx = canvas.getContext('2d');
     }
+
+    // Initialize global onload for the curtain image
+    imgObj.onload = () => {
+        if (canvas && canvas.width && imgObj.width) {
+            baseRect.height = (baseRect.width / imgObj.width) * imgObj.height;
+            if (typeof updateScale === 'function') updateScale();
+        }
+    };
 
     // Initialize with first image
     if (arModelBtns.length > 0) {
@@ -46,25 +59,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             
-            video.srcObject = stream;
+            // Show UI and video immediately so mobile browsers don't block video rendering
+            startOverlay.style.display = 'none';
+            video.style.display = 'block';
+            arControls.style.display = 'flex';
             
-            video.onloadedmetadata = () => {
-                video.play();
-                isArRunning = true;
-                
-                // Adjust canvas size to match video
+            video.srcObject = stream;
+            video.play().catch(e => console.warn("Auto-play prevented:", e));
+            isArRunning = true;
+            
+            // Wait a moment for DOM to reflow and video to start streaming before resizing
+            setTimeout(() => {
                 resizeCanvas();
-                
-                // Start drawing loop
+                // Start drawing loop if not already started
                 requestAnimationFrame(drawLoop);
+            }, 300);
 
-                // UI updates
-                startOverlay.style.display = 'none';
-                video.style.display = 'block';
-                arControls.style.display = 'flex';
+            // Also resize perfectly once video metadata (dimensions) is loaded
+            video.onloadedmetadata = () => {
+                resizeCanvas();
             };
         } catch (err) {
             console.error("Error accessing camera: ", err);
+            startOverlay.style.display = 'flex';
+            video.style.display = 'none';
+            arControls.style.display = 'none';
             alert("Tidak dapat mengakses kamera. Pastikan Anda memberikan izin akses kamera.");
         }
     };
@@ -87,19 +106,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const updateScale = () => {
+        if (!baseRect.width) return;
+        const oldW = overlayRect.width;
+        const oldH = overlayRect.height;
+        
+        overlayRect.width = baseRect.width * (widthSlider ? widthSlider.value : 1);
+        overlayRect.height = baseRect.height * (heightSlider ? heightSlider.value : 1);
+        
+        // keep it centered based on previous position
+        overlayRect.x -= (overlayRect.width - oldW) / 2;
+        overlayRect.y -= (overlayRect.height - oldH) / 2;
+    };
+
+    if (widthSlider) widthSlider.addEventListener('input', updateScale);
+    if (heightSlider) heightSlider.addEventListener('input', updateScale);
+
     const resizeCanvas = () => {
         if (!video || !canvas) return;
         
-        canvas.width = video.clientWidth;
-        canvas.height = video.clientHeight;
+        // Use container size or window size as fallback if video size is still 0
+        const container = document.getElementById('arViewContainer');
+        canvas.width = video.clientWidth || (container ? container.clientWidth : window.innerWidth) || 400;
+        canvas.height = video.clientHeight || (container ? container.clientHeight : window.innerHeight) || 300;
 
         // Set initial overlay rect relative to canvas size
-        overlayRect.width = canvas.width * 0.6;
-        overlayRect.height = (overlayRect.width / imgObj.width) * imgObj.height;
-        if (isNaN(overlayRect.height)) overlayRect.height = canvas.height * 0.7; // fallback
+        baseRect.width = canvas.width * 0.6;
         
+        // Prevent NaN if image hasn't loaded yet
+        if (imgObj.width && imgObj.height) {
+            baseRect.height = (baseRect.width / imgObj.width) * imgObj.height;
+        } else {
+            baseRect.height = canvas.height * 0.7; // fallback
+        }
+        
+        overlayRect.width = baseRect.width;
+        overlayRect.height = baseRect.height;
         overlayRect.x = (canvas.width - overlayRect.width) / 2;
         overlayRect.y = (canvas.height - overlayRect.height) / 2;
+        
+        // apply any active slider scale
+        if (widthSlider) widthSlider.value = 1;
+        if (heightSlider) heightSlider.value = 1;
+        updateScale();
     };
 
     // Handle window resize
@@ -117,7 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Draw the curtain image
         if (imgObj.complete && imgObj.src) {
+            // Memberikan sedikit transparansi (misal 0.95) agar terlihat lebih menyatu dengan pencahayaan sekitar (blending)
+            ctx.globalAlpha = 0.92;
             ctx.drawImage(imgObj, overlayRect.x, overlayRect.y, overlayRect.width, overlayRect.height);
+            ctx.globalAlpha = 1.0; // Reset
         }
         
         requestAnimationFrame(drawLoop);
@@ -139,14 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.classList.add('active');
             
             currentImage = e.target.dataset.img;
+            // Note: imgObj.onload is now handled globally above
             imgObj.src = currentImage;
-            
-            // Re-adjust ratio when new image loads
-            imgObj.onload = () => {
-                if (canvas.width) {
-                    overlayRect.height = (overlayRect.width / imgObj.width) * imgObj.height;
-                }
-            };
         });
     });
 
