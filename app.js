@@ -71,75 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Before & After Split Image Slider
-    const sliderContainer = document.getElementById('sliderContainer');
-    const afterImageContainer = document.getElementById('afterImageContainer');
-    const sliderHandle = document.getElementById('sliderHandle');
 
-    if (sliderContainer && afterImageContainer && sliderHandle) {
-        let isSliding = false;
-
-        // Function to update the split position based on page coordinates
-        const updateSlider = (clientX) => {
-            const rect = sliderContainer.getBoundingClientRect();
-            // Calculate relative offset within the container bounds
-            let offsetX = clientX - rect.left;
-            
-            // Constrain within container bounds
-            if (offsetX < 0) offsetX = 0;
-            if (offsetX > rect.width) offsetX = rect.width;
-
-            // Percentage value
-            const percent = (offsetX / rect.width) * 100;
-
-            // Set styles
-            afterImageContainer.style.width = `${percent}%`;
-            sliderHandle.style.left = `${percent}%`;
-        };
-
-        // Align inner "after" image size with the outer container size dynamically
-        const adjustAfterImgSize = () => {
-            const rect = sliderContainer.getBoundingClientRect();
-            const afterImg = afterImageContainer.querySelector('img');
-            if (afterImg) {
-                afterImg.style.width = `${rect.width}px`;
-            }
-        };
-
-        // Run initially and on resize
-        adjustAfterImgSize();
-        window.addEventListener('resize', adjustAfterImgSize);
-
-        // Mouse Events
-        sliderContainer.addEventListener('mousedown', (e) => {
-            isSliding = true;
-            updateSlider(e.clientX);
-        });
-
-        window.addEventListener('mouseup', () => {
-            isSliding = false;
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!isSliding) return;
-            updateSlider(e.clientX);
-        });
-
-        // Touch Events (for Mobile devices)
-        sliderContainer.addEventListener('touchstart', (e) => {
-            isSliding = true;
-            updateSlider(e.touches[0].clientX);
-        });
-
-        window.addEventListener('touchend', () => {
-            isSliding = false;
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if (!isSliding) return;
-            updateSlider(e.touches[0].clientX);
-        });
-    }
 
     // 5. Catalog Category Tab Filter
     const catalogTabs = document.querySelectorAll('.tab-btn');

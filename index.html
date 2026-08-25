@@ -36,9 +36,8 @@
             </a>
             <nav class="nav-menu" id="navMenu">
                 <a href="#home" class="nav-link active">Home</a>
-                <a href="#visualizer" class="nav-link">Visualizer 3D</a>
+                <a href="#ar-camera" class="nav-link">Kamera AR</a>
                 <a href="#catalog" class="nav-link">Katalog</a>
-                <a href="#before-after" class="nav-link">Transformasi</a>
                 <a href="#portfolio" class="nav-link">Portofolio</a>
                 <a href="#booking" class="nav-link">Booking Survey</a>
                 <a href="#blog" class="nav-link">Blog</a>
@@ -65,196 +64,68 @@
                     <h1 class="hero-title">Solusi Gorden Elegan untuk Rumah, Kantor, dan Hotel Anda</h1>
                     <p class="hero-desc">Ubah suasana ruangan Anda menjadi lebih mewah, nyaman, dan fungsional dengan gorden custom kualitas terbaik. Dibuat presisi sesuai ukuran jendela Anda.</p>
                     <div class="hero-ctas">
-                        <a href="#visualizer" class="btn btn-glow">
-                            <i data-lucide="view"></i>
-                            <span>Coba Visualizer 3D</span>
+                        <a href="#ar-camera" class="btn btn-glow">
+                            <i data-lucide="camera"></i>
+                            <span>Coba Kamera AR</span>
                         </a>
                         <a href="#booking" class="btn btn-outline">
                             <i data-lucide="calendar"></i>
                             <span>Booking Survey</span>
                         </a>
                     </div>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-num">500+</span>
-                            <span class="stat-label">Proyek Selesai</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-num">99%</span>
-                            <span class="stat-label">Puas & Rekomendasi</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-num">10+</span>
-                            <span class="stat-label">Pilihan Bahan</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="hero-visual-area">
                     <div class="hero-card-image">
-                        <img id="heroImg" src="assets/hero.png" alt="GordenKu Luxury Installation" class="fade-in-img">
-                        <div class="floating-badge">
-                            <i data-lucide="award"></i>
-                            <div>
-                                <h4>Bahan Premium</h4>
-                                <p>Garansi Kualitas 100%</p>
-                            </div>
-                        </div>
+                        <img id="heroImg" src="assets/hero.png" alt="GordenKu Luxury Installation" class="fade-in-img" style="border-radius: var(--radius-lg); box-shadow: var(--glass-shadow); border: 1px solid var(--dark-border);">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Brand USP Section (Keunggulan) -->
-    <section class="usp-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Mengapa Memilih GordenKu?</h2>
-                <p>Kami menghadirkan layanan ujung-ke-ujung untuk memastikan gorden Anda terpasang dengan sempurna tanpa repot.</p>
-            </div>
-            <div class="usp-grid">
-                <div class="usp-card">
-                    <div class="usp-icon"><i data-lucide="scissors"></i></div>
-                    <h3>Custom Sesuai Ukuran</h3>
-                    <p>Setiap gorden dijahit khusus sesuai dimensi detail jendela Anda agar terpasang presisi dan estetis.</p>
-                </div>
-                <div class="usp-card">
-                    <div class="usp-icon"><i data-lucide="truck"></i></div>
-                    <h3>Survey & Pemasangan Gratis</h3>
-                    <p>Tim ahli kami datang ke rumah Anda untuk mengukur secara presisi dan memasangnya secara rapi tanpa biaya tambahan.</p>
-                </div>
-                <div class="usp-card">
-                    <div class="usp-icon"><i data-lucide="shield-check"></i></div>
-                    <h3>Bahan Grade A+</h3>
-                    <p>Pilihan kain blackout 100% anti panas, linen alami, hingga blinds kantor berkualitas standar hotel.</p>
-                </div>
-                <div class="usp-card">
-                    <div class="usp-icon"><i data-lucide="badge-dollar-sign"></i></div>
-                    <h3>Harga Transparan</h3>
-                    <p>Tidak ada biaya tersembunyi. Dapatkan estimasi biaya instan dengan kalkulator visualizer 3D kami.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- 3D Visualizer & Calculator Section -->
-    <section id="visualizer" class="visualizer-section">
+
+    <!-- AR Camera Try-On Section -->
+    <section id="ar-camera" class="ar-section">
         <div class="container">
             <div class="section-header text-center">
-                <span class="sub-title">Visualizer 3D & Kalkulator Kain</span>
-                <h2>Desain & Simulasikan Gorden Anda</h2>
-                <p>Ubah ukuran, jenis kain, warna, dan buka-tutup gorden secara real-time untuk melihat estimasi kebutuhan kain dan biaya.</p>
+                <span class="sub-title">Coba di Ruangan Anda</span>
+                <h2>Kamera AR (Augmented Reality)</h2>
+                <p>Arahkan kamera ke jendela Anda, dan lihat langsung bagaimana gorden pilihan Anda terpasang secara virtual.</p>
             </div>
             
-            <div class="visualizer-container">
-                <!-- 3D Canvas Viewport -->
-                <div class="canvas-viewport">
-                    <div id="threejs-container" class="canvas-wrapper">
-                        <!-- Three.js Canvas will be inserted here -->
-                        <div class="canvas-loader" id="canvasLoader">
-                            <div class="spinner"></div>
-                            <p>Menyiapkan Studio 3D...</p>
-                        </div>
-                    </div>
-                    <div class="viewport-actions">
-                        <button class="btn-icon" id="btn-zoom-in" title="Perbesar"><i data-lucide="zoom-in"></i></button>
-                        <button class="btn-icon" id="btn-zoom-out" title="Perkecil"><i data-lucide="zoom-out"></i></button>
-                        <button class="btn-icon" id="btn-reset-cam" title="Reset Tampilan"><i data-lucide="refresh-cw"></i></button>
-                    </div>
-                    <div class="viewport-hint">
-                        <i data-lucide="hand"></i> Klik & seret untuk memutar ruangan 3D
-                    </div>
-                </div>
-
-                <!-- Customizer Control Panel -->
-                <div class="customizer-panel">
-                    <div class="panel-header">
-                        <h3>Konfigurasi Jendela & Gorden</h3>
-                    </div>
-                    <div class="panel-body">
-                        <!-- Model Selection -->
-                        <div class="control-group">
-                            <label class="control-label">Jenis Gorden / Blinds</label>
-                            <div class="custom-select-grid">
-                                <button class="select-btn active" data-model="wavy">
-                                    <i data-lucide="fold-horizontal"></i>
-                                    <span>Gorden Klasik</span>
-                                </button>
-                                <button class="select-btn" data-model="roller">
-                                    <i data-lucide="scroll"></i>
-                                    <span>Roller Blind</span>
-                                </button>
-                                <button class="select-btn" data-model="vertical">
-                                    <i data-lucide="fold-vertical"></i>
-                                    <span>Vertical Blind</span>
-                                </button>
-                                <button class="select-btn" data-model="wooden">
-                                    <i data-lucide="menu"></i>
-                                    <span>Wooden Blind</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Fabric / Color Selection -->
-                        <div class="control-group">
-                            <label class="control-label">Pilihan Bahan & Warna</label>
-                            <div class="material-swatches" id="materialSwatches">
-                                <!-- Generated by JS based on selected model -->
-                            </div>
-                            <div class="material-desc" id="materialDesc">
-                                <strong>Premium Velvet Navy:</strong> Kain tebal bertekstur mewah dengan efek blackout 90%. Cocok untuk ruang tidur & home theater.
-                            </div>
-                        </div>
-
-                        <!-- Sizing Sliders -->
-                        <div class="control-group">
-                            <div class="slider-header">
-                                <label class="control-label">Lebar Jendela (meter)</label>
-                                <span class="val-display" id="val-width">2.0 m</span>
-                            </div>
-                            <input type="range" id="input-width" min="1.0" max="4.0" step="0.1" value="2.0" class="custom-slider">
-                        </div>
-
-                        <div class="control-group">
-                            <div class="slider-header">
-                                <label class="control-label">Tinggi Jendela (meter)</label>
-                                <span class="val-display" id="val-height">2.5 m</span>
-                            </div>
-                            <input type="range" id="input-height" min="1.0" max="3.5" step="0.1" value="2.5" class="custom-slider">
-                        </div>
-
-                        <!-- Open/Close Slider -->
-                        <div class="control-group">
-                            <div class="slider-header">
-                                <label class="control-label">Buka / Tutup Gorden</label>
-                                <span class="val-display" id="val-open">50%</span>
-                            </div>
-                            <input type="range" id="input-open" min="0" max="100" value="50" class="custom-slider">
-                        </div>
-
-                        <!-- Outputs and Calculations -->
-                        <div class="estimation-card">
-                            <h4>Hasil Estimasi Kebutuhan</h4>
-                            <div class="est-row">
-                                <span>Kebutuhan Kain:</span>
-                                <strong id="est-kain">7.0 meter</strong>
-                            </div>
-                            <div class="est-row">
-                                <span>Panjang Rel:</span>
-                                <strong id="est-rel">2.2 meter</strong>
-                            </div>
-                            <div class="est-price-box">
-                                <span>Estimasi Total Biaya</span>
-                                <h3 id="est-harga">Rp 1.850.000</h3>
-                                <p>*Sudah termasuk jasa jahit. Belum termasuk aksesoris tambahan & rel.</p>
-                            </div>
-                        </div>
-
-                        <!-- Actions -->
-                        <button class="btn btn-primary w-100 btn-wa-order" id="btn-pesan-visualizer">
-                            <i data-lucide="shopping-cart"></i>
-                            <span>Pesan Gorden Ini Sekarang</span>
+            <div class="ar-wrapper">
+                <div class="ar-view-container" id="arViewContainer">
+                    <!-- Video from Camera -->
+                    <video id="arVideo" autoplay playsinline></video>
+                    <!-- Canvas for AR Overlay -->
+                    <canvas id="arCanvas"></canvas>
+                    
+                    <!-- Overlay for starting AR -->
+                    <div class="ar-start-overlay" id="arStartOverlay">
+                        <i data-lucide="camera"></i>
+                        <h3>Simulasi dengan Kamera Asli</h3>
+                        <p>Fitur ini memerlukan izin akses kamera perangkat Anda. (Gunakan smartphone untuk hasil terbaik)</p>
+                        <button class="btn btn-primary" id="btnStartAR">
+                            <i data-lucide="video"></i> Buka Kamera
                         </button>
+                    </div>
+
+                    <!-- AR Controls overlay -->
+                    <div class="ar-controls" id="arControls">
+                        <div class="ar-models">
+                            <button class="btn-ar-model active" data-img="assets/katalog-minimalis.png">Minimalis</button>
+                            <button class="btn-ar-model" data-img="assets/katalog-blackout.png">Blackout</button>
+                            <button class="btn-ar-model" data-img="assets/katalog-roller.png">Roller</button>
+                        </div>
+                        <div class="ar-actions">
+                            <button class="btn-icon-ar" id="btnArScreenshot" title="Ambil Foto">
+                                <i data-lucide="camera"></i>
+                            </button>
+                            <button class="btn-icon-ar btn-close-ar" id="btnStopAR" title="Tutup Kamera">
+                                <i data-lucide="x"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -446,39 +317,7 @@
         </div>
     </section>
 
-    <!-- Before & After Transformation Section -->
-    <section id="before-after" class="before-after-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="sub-title">Galeri Sebelum & Sesudah</span>
-                <h2>Saksikan Transformasi Ruangan</h2>
-                <p>Seret slider ke kiri dan ke kanan untuk melihat perbedaan luar biasa sebelum dan sesudah ruangan dipasangi gorden custom GordenKu.</p>
-            </div>
-            
-            <div class="slider-comparison-container" id="sliderContainer">
-                <!-- Before Side (Left / Background) -->
-                <div class="slide-image before-image">
-                    <img id="beforeImg" src="assets/before.png" alt="Desain Roller Blind">
-                    <div class="slide-label before-label">Roller Blind</div>
-                </div>
-                
-                <!-- After Side (Right / Foreground, clipped) -->
-                <div class="slide-image after-image" id="afterImageContainer">
-                    <img id="afterImg" src="assets/after.png" alt="Desain Gorden Kain">
-                    <div class="slide-label after-label">Gorden Kain</div>
-                </div>
-                
-                <!-- Split Slider Handler -->
-                <div class="slider-handle" id="sliderHandle">
-                    <div class="handle-line"></div>
-                    <div class="handle-button">
-                        <i data-lucide="chevrons-left-right"></i>
-                    </div>
-                    <div class="handle-line"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Portofolio Proyek Section -->
     <section id="portfolio" class="portfolio-section">
@@ -763,9 +602,8 @@
                     <h4>Navigasi</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#visualizer">Visualizer 3D</a></li>
+                        <li><a href="#ar-camera">Kamera AR</a></li>
                         <li><a href="#catalog">Katalog Produk</a></li>
-                        <li><a href="#before-after">Galeri Transformasi</a></li>
                         <li><a href="#booking">Booking Survey</a></li>
                     </ul>
                 </div>
@@ -796,12 +634,8 @@
         </div>
     </footer>
 
-    <!-- ThreeJS Scripts from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    
     <!-- Application Scripts -->
-    <script src="visualizer.js"></script>
     <script src="app.js"></script>
+    <script src="ar.js"></script>
 </body>
 </html>
